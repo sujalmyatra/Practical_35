@@ -1,0 +1,163 @@
+============================================================
+
+Prompt 1: Project Orientation
+
+Role:
+Act as a C# .NET developer.
+
+Context:
+I am building a Student Management Console App using layered architecture. The project setup and layers are already created.
+
+Task:
+Have the knowledge of project using CLAUDE.md.
+
+Constraints:
+Do not implement anything yet.
+
+============================================================
+
+Prompt 2: Student Entity
+
+Role:
+Act as a C# .NET developer.
+
+Context:
+I am building a Student Management Console App using layered architecture. The project setup and layers are already created.
+
+Task:
+Create a Student entity with the following properties:
+
+Id
+Name
+Email
+EnrollmentDate
+Grade
+
+Place the class in the correct Domain/Models layer.
+
+Format:
+Provide clean C# code with proper namespace, class name, and properties.
+
+Constraints:
+Implement only the Student class.
+Do not add business logic in the entity.
+Do not add exception handling in the entity.
+Do not add service, or tests yet.
+Commit with message: Add Student model.
+
+============================================================
+
+Prompt 3: StudentService
+
+Role:
+Act as a C# .NET developer.
+
+Context:
+The Student entity is already created in the Domain/Models layer.
+
+Task:
+Create a StudentService interface and StudentService implementation.
+
+1. Create an interface for StudentService with the following methods:
+
+Add
+GetAll
+GetById
+UpdateGrade
+Delete
+
+2. Create a StudentService class implementing its interface.
+
+Implement all methods using in-memory List<Student> storage only.
+
+Place the interface and class in the correct Application/Services layer.
+
+Format:
+As previous.
+
+Constraints:
+Use only an in-memory List<Student>.
+Do NOT use DTOs or AutoMapper.
+Add basic validation using FluentValidation where needed.
+Return appropriate exceptions where needed and cover all validations.
+Commit with message: Add and implement StudentService.
+
+============================================================
+
+Prompt 4: Console Menu Structure
+
+Role:
+Act as a C# .NET developer.
+
+Context:
+The Student model and StudentService are already implemented. I am now creating the console UI.
+
+Task:
+Create a simple menu-driven console UI in Program.cs with options:
+
+1. Add Student
+2. View All Students
+3. View Student By Id
+4. Update Student Grade
+5. Delete Student
+6. Exit
+
+Create the menu structure and call separate methods for each option.
+
+Format:
+Provide clean C# code for Program.cs and simple menu flow.
+
+Constraints:
+Implement only the menu structure.
+Commit with message: Add console menu UI.
+
+============================================================
+
+Prompt 5: Implement Program.cs Methods
+
+Role:
+Act as a C# .NET developer.
+
+Context:
+The Student model and StudentService are already implemented. Program.cs has the console menu structure.
+
+Task:
+Implement each menu method to call the StudentService, in working condition.
+
+Format:
+Provide clean C# code for Program.cs methods.
+
+Constraints:
+Keep the console UI simple and readable.
+Use StudentService methods for Add, GetAll, GetById, UpdateGrade, and Delete.
+Handle exceptions with clear console messages.
+Commit with message: implement program.cs methods.
+
+============================================================
+
+Prompt 6: xUnit Tests
+
+Role:
+Act as a C# .NET developer.
+
+Context:
+The xUnit test project is already created and connected to the main project. StudentService has Add, GetAll, GetById, UpdateGrade, and Delete methods.
+
+Task:
+Write 5 xUnit tests for StudentService.
+
+Cover these cases:
+
+Add student successfully
+Get all students
+Get student by Id
+Update student grade
+Delete student
+
+Format:
+Provide clean xUnit test code with Arrange, Act, Assert structure.
+
+Constraints:
+Write only StudentService tests.
+Keep tests simple and readable.
+Commit with message: Add xUnit tests for StudentService.
