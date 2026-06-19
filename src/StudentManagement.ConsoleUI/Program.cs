@@ -1,8 +1,12 @@
 using FluentValidation;
 using StudentManagement.Application.Services;
+using StudentManagement.Application.Validators;
 using StudentManagement.Domain.Models;
+using StudentManagement.Infrastructure.Repositories;
 
-var service = new StudentService();
+IValidator<Student> validator = new StudentValidator();
+var repository = new InMemoryStudentRepository();
+var service = new StudentService(repository, validator);
 bool running = true;
 
 while (running)

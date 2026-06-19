@@ -1,10 +1,20 @@
+using FluentValidation;
 using StudentManagement.Application.Services;
+using StudentManagement.Application.Validators;
 using StudentManagement.Domain.Models;
+using StudentManagement.Infrastructure.Repositories;
 
 namespace StudentManagement.Tests;
 
 public class StudentServiceTests
 {
+    private static StudentService CreateService()
+    {
+        IValidator<Student> validator = new StudentValidator();
+        var repository = new InMemoryStudentRepository();
+        return new StudentService(repository, validator);
+    }
+
     private static Student CreateValidStudent() => new Student
     {
         Name = "John Doe",
@@ -17,7 +27,7 @@ public class StudentServiceTests
     public void Add_ShouldAddStudentSuccessfully()
     {
         // Arrange
-        var service = new StudentService();
+        var service = CreateService();
         var student = CreateValidStudent();
 
         // Act
@@ -33,7 +43,7 @@ public class StudentServiceTests
     public void GetAll_ShouldReturnAllStudents()
     {
         // Arrange
-        var service = new StudentService();
+        var service = CreateService();
         service.Add(CreateValidStudent());
         service.Add(new Student
         {
@@ -54,7 +64,7 @@ public class StudentServiceTests
     public void GetById_ShouldReturnCorrectStudent()
     {
         // Arrange
-        var service = new StudentService();
+        var service = CreateService();
         var student = CreateValidStudent();
         service.Add(student);
 
@@ -70,7 +80,7 @@ public class StudentServiceTests
     public void UpdateGrade_ShouldUpdateStudentGrade()
     {
         // Arrange
-        var service = new StudentService();
+        var service = CreateService();
         var student = CreateValidStudent();
         service.Add(student);
 
@@ -86,7 +96,7 @@ public class StudentServiceTests
     public void Delete_ShouldRemoveStudent()
     {
         // Arrange
-        var service = new StudentService();
+        var service = CreateService();
         var student = CreateValidStudent();
         service.Add(student);
 

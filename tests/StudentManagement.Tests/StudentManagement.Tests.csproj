@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\StudentManagement.Application\StudentManagement.Application.csproj" />
     <ProjectReference Include="..\..\src\StudentManagement.Domain\StudentManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\src\StudentManagement.Infrastructure\StudentManagement.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

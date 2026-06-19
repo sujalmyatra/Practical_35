@@ -1,16 +1,21 @@
 using FluentValidation;
-using StudentManagement.Application.Validators;
+using StudentManagement.Application.Interfaces;
 using StudentManagement.Domain.Models;
 
 namespace StudentManagement.Application.Services;
 
 public class StudentService : IStudentService
 {
-    private readonly List<Student> _students = new();
-    private readonly StudentValidator _validator = new();
-    private int _nextId = 1;
+    private readonly IStudentRepository _repository;
+    private readonly IValidator<Student> _validator;
 
     private static readonly string[] ValidGrades = { "A", "B", "C", "D", "F" };
+
+    public StudentService(IStudentRepository repository, IValidator<Student> validator)
+    {
+        _repository = repository;
+        _validator = validator;
+    }
 
     public void Add(Student student)
     {
@@ -18,21 +23,17 @@ public class StudentService : IStudentService
         if (!result.IsValid)
             throw new ValidationException(result.Errors);
 
-        if (_students.Any(s => s.Email.Equals(student.Email, StringComparison.OrdinalIgnoreCase)))
+        if (_repository.ExistsByEmail(student.Email))
             throw new InvalidOperationException($"A student with email '{student.Email}' already exists.");
 
-        student.Id = _nextId++;
-        _students.Add(student);
+        _repository.Add(student);
     }
 
-    public List<Student> GetAll()
-    {
-        return _students.ToList();
-    }
+    public List<Student> GetAll() => _repository.GetAll();
 
     public Student GetById(int id)
     {
-        var student = _students.FirstOrDefault(s => s.Id == id);
+        var student = _repository.GetById(id);
         if (student is null)
             throw new KeyNotFoundException($"Student with ID {id} was not found.");
 
@@ -49,11 +50,12 @@ public class StudentService : IStudentService
 
         var student = GetById(id);
         student.Grade = grade;
+        _repository.Update(student);
     }
 
     public void Delete(int id)
     {
         var student = GetById(id);
-        _students.Remove(student);
+        _repository.Delete(student);
     }
 }
