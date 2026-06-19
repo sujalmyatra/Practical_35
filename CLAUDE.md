@@ -19,7 +19,7 @@ Required features:
 * Follow basic layered architecture.
 * Follow basic SOLID principles.
 * Follow common .NET naming and coding standards.
-* Add validation only when the current milestone asks for it.
+
 
 ## Architecture
 Use simple layers:
@@ -29,23 +29,9 @@ Use simple layers:
 * 'Program.cs' for console menu UI
 * Test project for xUnit tests
 
-## Git Rule
-After every successfully completed milestone:
-
-* Run 'git add .'
-* Commit with a simple milestone message
-
-Example commit messages:
-* 'Add Student model'
-* 'Add student service interface'
-* 'Implement StudentService methods'
-
-
 ## Avoid
-
 Do not add:
 
 Database
 Entity Framework
 Web API
-Repository pattern
