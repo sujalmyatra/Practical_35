@@ -1,5 +1,6 @@
 namespace StudentManagement.Domain.Models;
 
+// Represents a student in the system.
 public class Student
 {
     public int Id { get; set; }

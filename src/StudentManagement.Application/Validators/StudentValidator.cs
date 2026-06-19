@@ -3,8 +3,10 @@ using StudentManagement.Domain.Models;
 
 namespace StudentManagement.Application.Validators;
 
+// Validates a Student object before it is added to storage.
 public class StudentValidator : AbstractValidator<Student>
 {
+    // Accepted letter grades — must stay in sync with ValidGrades in StudentService.
     private static readonly string[] ValidGrades = { "A", "B", "C", "D", "F" };
 
     public StudentValidator()

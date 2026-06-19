@@ -4,11 +4,14 @@ using StudentManagement.Domain.Models;
 
 namespace StudentManagement.Application.Services;
 
+// Contains the business rules for managing students.
+// Storage and validation are injected so this class only focuses on logic.
 public class StudentService : IStudentService
 {
     private readonly IStudentRepository _repository;
     private readonly IValidator<Student> _validator;
 
+    // Accepted grades for UpdateGrade — must stay in sync with ValidGrades in StudentValidator.
     private static readonly string[] ValidGrades = { "A", "B", "C", "D", "F" };
 
     public StudentService(IStudentRepository repository, IValidator<Student> validator)

@@ -4,6 +4,7 @@ using StudentManagement.Application.Validators;
 using StudentManagement.Domain.Models;
 using StudentManagement.Infrastructure.Repositories;
 
+// Wire up dependencies manually — no DI container is used in this console app.
 IValidator<Student> validator = new StudentValidator();
 var repository = new InMemoryStudentRepository();
 var service = new StudentService(repository, validator);
@@ -171,6 +172,7 @@ void DeleteStudent()
     }
 }
 
+// Prints a single student's details to the console in a consistent format.
 void DisplayStudent(Student student)
 {
     Console.WriteLine($"\n  ID            : {student.Id}");

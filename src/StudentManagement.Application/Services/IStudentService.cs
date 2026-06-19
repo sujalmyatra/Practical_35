@@ -2,6 +2,7 @@ using StudentManagement.Domain.Models;
 
 namespace StudentManagement.Application.Services;
 
+// Defines the operations the console UI can perform on students.
 public interface IStudentService
 {
     void Add(Student student);
